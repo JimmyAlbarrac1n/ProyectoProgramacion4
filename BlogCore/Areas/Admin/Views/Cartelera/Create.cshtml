@@ -1,0 +1,52 @@
+﻿@model BlogCore.Models.Carteleras
+
+@{
+    ViewData["Title"] = "Crear Cartelera";
+}
+
+<br />
+<br />
+<h3 class="text-center">Añadir nueva clasificación</h3>
+<form method="post" asp-action="Create">
+    <div class="row px-2 offset-1 border">
+        <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="col-10 offset-1 mt-4">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Clasificacion"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Clasificacion" class="form-control" placeholder="Ingresa la clasificación" />
+                        <span asp-validation-for="Clasificacion" class="text-danger"></span>
+                    </div>
+                </div>
+               
+                <br />
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Genero"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Genero" class="form-control" placeholder="Ingresa el género" />
+                        <span asp-validation-for="Genero" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+               
+                <br />
+                
+                <div class="form-group-row">
+                    <div class="col-8">
+                        <partial name="_VistaCrearVolver" />
+                    </div>
+                </div>
+            </div>
+      
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name ="_ValidationScriptsPartial" />
+    }
+}
