@@ -1,0 +1,73 @@
+﻿@model BlogCore.Models.ViewModels.PeliculaVM
+
+@{
+    ViewData["Title"] = "Añadir nueva película";
+}
+
+<br />
+<br />
+<h3 class="text-center">Añadir nueva película</h3>
+<form method="post" asp-action="Create" enctype="multipart/form-data">
+    <div class="row px-2 offset-1 border">
+        <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="col-10 offset-1 mt-4">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Pelicula.Nombre"></label>
+                    </div>
+                    <div class="col-8">
+                    <input asp-for="Pelicula.Nombre" class="form-control" placeholder="Ingresa el nombre de la película" />
+                    <span asp-validation-for="Pelicula.Nombre" class="text-danger"></span>
+                    </div>
+                </div>
+               
+                <br />
+                <div class="form-group row">
+                    <div class="col-4">
+                    <label asp-for="Pelicula.Sinopsis"></label>
+                    </div>
+                    <div class="col-8">
+                    <input asp-for="Pelicula.Sinopsis" class="form-control" placeholder="Ingresa la sinopsis" />
+                    <span asp-validation-for="Pelicula.Sinopsis" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label for="Clasificación">Clasificación</label>
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m=> m.Pelicula.CarteleraId, Model.ListaCarteleras,
+                    "-Por favor  seleccione una clasificación-", new {@class="form-control"})
+                    <span asp-validation-for="Pelicula.CarteleraId" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Pelicula.UrlImagen"></label>
+                </div>
+                <div class="col-8">
+                    <input type="file" name="archivos" id="subidaArchivo" class="form-control"/>
+                    <span asp-validation-for="Pelicula.UrlImagen" class="text-danger"></span>
+                </div>
+            </div>
+                <br />
+               
+                <br />
+                
+                <div class="form-group-row">
+                    <div class="col-8">
+                        <partial name="_VistaCrearVolver" />
+                    </div>
+                </div>
+            </div>
+      
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name ="_ValidationScriptsPartial" />
+    }
+}

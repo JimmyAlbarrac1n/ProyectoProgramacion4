@@ -10,7 +10,8 @@ namespace BlogCore.AccesoDatos.Data.Repository.IRepository
     {
         //Aqui se deben ir agregando los diferentes repositorios
         ICarteleraRepository Cartelera { get; }
-        
+        IPeliculaRepository Pelicula { get; }
+
         void Save();
 
     }

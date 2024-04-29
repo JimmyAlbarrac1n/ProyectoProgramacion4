@@ -1,5 +1,4 @@
 ﻿using BlogCore.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace BlogCore.AccesoDatos.Data.Repository.IRepository
 {
-    public interface ICarteleraRepository : IRepository<Carteleras>
+    public interface IPeliculaRepository : IRepository<Pelicula>
     {
-        void Update(Carteleras cartelera);
-        IEnumerable<SelectListItem> GetListaCarteleras();
+        void Update(Pelicula pelicula);
 
     }
 }
