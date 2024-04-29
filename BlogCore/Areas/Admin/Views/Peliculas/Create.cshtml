@@ -34,6 +34,16 @@
                 <br />
             <div class="form-group row">
                 <div class="col-4">
+                    <label asp-for="Pelicula.duracion"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Pelicula.duracion" class="form-control" placeholder="Ingresa la duración de la película" />
+                    <span asp-validation-for="Pelicula.duracion" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
                     <label for="Clasificación">Clasificación</label>
                 </div>
                 <div class="col-8">

@@ -17,7 +17,6 @@ function cargarDatatable() {
             { "data": "id", "width": "5%" },
             { "data": "nombre", "width": "20%" },
             { "data": "cartelera.clasificacion", "width": "15%" },
-            { "data": "cartelera.genero", "width": "15%" },
             { "data": "duracion", "width": "25%" },
             {
                 "data": "id",
