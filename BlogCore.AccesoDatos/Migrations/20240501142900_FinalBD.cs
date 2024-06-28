@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BlogCore.AccesoDatos.Migrations
 {
     /// <inheritdoc />
-    public partial class PeliculasDB : Migration
+    public partial class FinalBD : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -178,9 +178,9 @@ namespace BlogCore.AccesoDatos.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Sinopsis = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UrlImagen = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UrlImagen = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CarteleraId = table.Column<int>(type: "int", nullable: false),
-                    duracion = table.Column<int>(type: "int", nullable: false)
+                    Duracion = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

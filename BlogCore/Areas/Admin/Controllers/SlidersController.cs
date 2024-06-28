@@ -1,16 +1,17 @@
 ﻿using BlogCore.AccesoDatos.Data.Repository.IRepository;
+using BlogCore.Models;
 using BlogCore.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 namespace BlogCore.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class PeliculasController : Controller
+    public class SlidersController : Controller
     {
         private readonly IContenedorTrabajo _contenedorTrabajo;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public PeliculasController(IContenedorTrabajo contenedorTrabajo, 
+        public SlidersController(IContenedorTrabajo contenedorTrabajo, 
             IWebHostEnvironment hostingEnvironment)
         {
             _contenedorTrabajo = contenedorTrabajo;
@@ -25,35 +26,32 @@ namespace BlogCore.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            PeliculaVM peliVM = new PeliculaVM()
-            {
-                Pelicula = new BlogCore.Models.Pelicula(),
-                ListaCarteleras = _contenedorTrabajo.Cartelera.GetListaCarteleras()
-            };
-            return View(peliVM);
+            
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(PeliculaVM peliVM)
+        public IActionResult Create(Slider slider)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 string rutaPrincipal = _hostingEnvironment.WebRootPath;
                 var archivos = HttpContext.Request.Form.Files;
-                if(peliVM.Pelicula.Id == 0 && archivos.Count()>0)
+                if (archivos.Count() > 0)
                 {
+                    //Nuevo slider
                     string nombreArchivo = Guid.NewGuid().ToString();
-                    var subidas = Path.Combine(rutaPrincipal, @"imagenes\peliculas");
+                    var subidas = Path.Combine(rutaPrincipal, @"imagenes\sliders");
                     var extension = Path.GetExtension(archivos[0].FileName);
                     using (var fileStreams = new FileStream(Path.Combine(subidas, nombreArchivo + extension), FileMode.Create))
                     {
                         archivos[0].CopyTo(fileStreams);
                     }
 
-                    peliVM.Pelicula.UrlImagen= @"\imagenes\peliculas\"+ nombreArchivo+extension;
-                    
+                    slider.UrlImagen = @"\imagenes\sliders\" + nombreArchivo + extension;
 
-                    _contenedorTrabajo.Pelicula.Add(peliVM.Pelicula);
+
+                    _contenedorTrabajo.Slider.Add(slider);
                     _contenedorTrabajo.Save();
                     return RedirectToAction(nameof(Index));
                 }
@@ -62,72 +60,68 @@ namespace BlogCore.Areas.Admin.Controllers
                     ModelState.AddModelError("Imagen", "Debes seleccionar una imágen");
                 }
             }
-            peliVM.ListaCarteleras = _contenedorTrabajo.Cartelera.GetListaCarteleras();
-            return View(peliVM);
+           
+            return View(slider);
         }
 
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            PeliculaVM peliVM = new PeliculaVM()
-            {
-                Pelicula = new BlogCore.Models.Pelicula(),
-                ListaCarteleras = _contenedorTrabajo.Cartelera.GetListaCarteleras()
-            };
+            
             if (id != null)
             {
-                peliVM.Pelicula = _contenedorTrabajo.Pelicula.Get(id.GetValueOrDefault());
+                var slider = _contenedorTrabajo.Slider.Get(id.GetValueOrDefault());
+                return View(slider);
             }
-            return View(peliVM);
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(PeliculaVM peliVM)
+        public IActionResult Edit(Slider slider)
         {
             if (ModelState.IsValid)
             {
                 string rutaPrincipal = _hostingEnvironment.WebRootPath;
                 var archivos = HttpContext.Request.Form.Files;
-
-                var peliculaDesdeBd = _contenedorTrabajo.Pelicula.Get(peliVM.Pelicula.Id);
-                if ( archivos.Count() > 0)
+                var sliderDesdeBd = _contenedorTrabajo.Slider.Get(slider.Id);
+                if (archivos.Count() > 0)
                 {
-                    //Nueva imagen para la pelicula
+                    //Nuevo slider
                     string nombreArchivo = Guid.NewGuid().ToString();
-                    var subidas = Path.Combine(rutaPrincipal, @"imagenes\peliculas");
+                    var subidas = Path.Combine(rutaPrincipal, @"imagenes\sliders");
                     var extension = Path.GetExtension(archivos[0].FileName);
-                    var nuevaExtension = Path.GetExtension(archivos[0].FileName);
-                    var rutaImagen = Path.Combine(rutaPrincipal, peliculaDesdeBd.UrlImagen.TrimStart('\\'));
+                   // var nuevaExtension = Path.GetExtension(archivos[0].FileName);
+                    var rutaImagen = Path.Combine(rutaPrincipal, sliderDesdeBd.UrlImagen.TrimStart('\\'));
 
                     if(System.IO.File.Exists(rutaImagen))
                     {
                         System.IO.File.Delete(rutaImagen);
                     }
-                    //Nuevamente subimos el archivo
-                    
+                    //Nuevamente se sube el archivo
                     using (var fileStreams = new FileStream(Path.Combine(subidas, nombreArchivo + extension), FileMode.Create))
                     {
                         archivos[0].CopyTo(fileStreams);
                     }
 
-                    peliVM.Pelicula.UrlImagen = @"\imagenes\peliculas\" + nombreArchivo + extension;
+                    slider.UrlImagen = @"\imagenes\sliders\" + nombreArchivo + extension;
 
 
-                    _contenedorTrabajo.Pelicula.Update(peliVM.Pelicula);
+                    _contenedorTrabajo.Slider.Update(slider);
                     _contenedorTrabajo.Save();
                     return RedirectToAction(nameof(Index));
                 }
                 else
                 {
-                    peliVM.Pelicula.UrlImagen = peliculaDesdeBd.UrlImagen;
+                    slider.UrlImagen = sliderDesdeBd.UrlImagen;
                 }
-                _contenedorTrabajo.Pelicula.Update(peliVM.Pelicula);
+                _contenedorTrabajo.Slider.Update(slider);
                 _contenedorTrabajo.Save();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index)); 
+
             }
-            peliVM.ListaCarteleras = _contenedorTrabajo.Cartelera.GetListaCarteleras();
-            return View(peliVM);
+
+            return View(slider);
         }
 
 
@@ -137,26 +131,26 @@ namespace BlogCore.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Json(new { data = _contenedorTrabajo.Pelicula.GetAll(includeProperties: "Cartelera") });
+            return Json(new { data = _contenedorTrabajo.Slider.GetAll() });
         }
 
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var peliculaDesdeBd = _contenedorTrabajo.Pelicula.Get(id);
+            var sliderDesdeBd = _contenedorTrabajo.Slider.Get(id);
             string rutaDirectorioPrincipal = _hostingEnvironment.WebRootPath;
-            var rutaImagen = Path.Combine(rutaDirectorioPrincipal, peliculaDesdeBd.UrlImagen.TrimStart('\\'));
+            var rutaImagen = Path.Combine(rutaDirectorioPrincipal, sliderDesdeBd.UrlImagen.TrimStart('\\'));
 
             if (System.IO.File.Exists(rutaImagen))
             {
                 System.IO.File.Delete(rutaImagen);
             }
 
-            if (peliculaDesdeBd == null)
+            if (sliderDesdeBd == null)
             {
-                return Json(new { success = false, message = "Error al borrar pelicula" });
+                return Json(new { success = false, message = "Error al borrar slider" });
             }
-            _contenedorTrabajo.Pelicula.Remove(peliculaDesdeBd);
+            _contenedorTrabajo.Slider.Remove(sliderDesdeBd);
             _contenedorTrabajo.Save();
             return Json(new { success = true, message = "Pelicula borrada correctamente" });
         }

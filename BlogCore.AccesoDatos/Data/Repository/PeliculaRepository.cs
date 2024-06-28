@@ -24,7 +24,7 @@ namespace BlogCore.AccesoDatos.Data.Repository
             objDesdeDb.Sinopsis = pelicula.Sinopsis;
             objDesdeDb.UrlImagen = pelicula.UrlImagen;
             objDesdeDb.CarteleraId = pelicula.CarteleraId;
-            objDesdeDb.duracion = pelicula.duracion;
+            objDesdeDb.Duracion = pelicula.Duracion;
 
 
             //_db.SaveChanges();

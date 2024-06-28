@@ -1,37 +1,39 @@
 ﻿@model BlogCore.Models.ViewModels.PeliculaVM
 
 @{
-    ViewData["Title"] = "Añadir nueva película";
+    ViewData["Title"] = "Editar película";
 }
 
 <br />
 <br />
-<h3 class="text-center">Añadir nueva película</h3>
-<form method="post" asp-action="Create" enctype="multipart/form-data">
+<h3 class="text-center">Editar película</h3>
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+
+    <input type="hidden" asp-for="Pelicula.Id"/>
     <div class="row px-2 offset-1 border">
         <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="col-10 offset-1 mt-4">
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Pelicula.Nombre"></label>
-                    </div>
-                    <div class="col-8">
+        <div class="col-8 mt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Pelicula.Nombre"></label>
+                </div>
+                <div class="col-8">
                     <input asp-for="Pelicula.Nombre" class="form-control" placeholder="Ingresa el nombre de la película" />
                     <span asp-validation-for="Pelicula.Nombre" class="text-danger"></span>
-                    </div>
                 </div>
-               
-                <br />
-                <div class="form-group row">
-                    <div class="col-4">
+            </div>
+
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
                     <label asp-for="Pelicula.Sinopsis"></label>
-                    </div>
-                    <div class="col-8">
+                </div>
+                <div class="col-8">
                     <textarea asp-for="Pelicula.Sinopsis" class="form-control" style="height: 300px;"></textarea>
                     <span asp-validation-for="Pelicula.Sinopsis" class="text-danger"></span>
-                    </div>
                 </div>
-                <br />
+            </div>
+            <br />
             <div class="form-group row">
                 <div class="col-4">
                     <label for="Clasificación">Clasificación</label>
@@ -62,31 +64,38 @@
                     <span asp-validation-for="Pelicula.UrlImagen" class="text-danger"></span>
                 </div>
             </div>
-           
-           
-            
-                <br />
-               
-                <br />
-                
-                <div class="form-group-row">
-                    <div class="col-8">
-                        <partial name="_VistaCrearVolver" />
-                    </div>
+
+
+
+            <br />
+
+            <br />
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary form-control">Editar Pelicula</button>
                 </div>
+                &nbsp;
+                <div class="col">
+                    <a asp-action="Index" class="btn btn-success form-control">Volver Atrás</a>
+                </div>
+
             </div>
-      
+        </div>
+        <div class="col-4 pt-3">
+            <img src="@Model.Pelicula.UrlImagen" width="300px" style="border-radius:5px; border:1px solid #bbb9b9"/>
+        </div>
     </div>
 </form>
 
-@section Scripts{
+@section Scripts {
     @{
-        <partial name ="_ValidationScriptsPartial" />
+        <partial name="_ValidationScriptsPartial" />
     }
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.1.2/tinymce.min.js" integrity="sha512-2T0G/zn88pKqnmUStXKW0BSPIW3Y2sky5Bl6HER5TwPGqCsLTVzAQRZMum/ptf5mRwYylP1lcvnLkgn6chASuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         tinymce.init({
-            selector:'textarea',
+            selector: 'textarea',
             plugins: 'lilsts',
             menubar: 'file edit format'
         });

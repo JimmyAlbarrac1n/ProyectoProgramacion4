@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogCore.AccesoDatos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240428225801_PeliculasDB")]
-    partial class PeliculasDB
+    [Migration("20240501142900_FinalBD")]
+    partial class FinalBD
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,6 +57,9 @@ namespace BlogCore.AccesoDatos.Migrations
                     b.Property<int>("CarteleraId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Duracion")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -66,11 +69,7 @@ namespace BlogCore.AccesoDatos.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UrlImagen")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("duracion")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
