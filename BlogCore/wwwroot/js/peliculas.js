@@ -25,6 +25,7 @@ function cargarDatatable() {
             },
 
             { "data": "duracion", "width": "25%" },
+            { "data": "precio", "width": "25%" },
             {
                 "data": "id",
                 "render": function (data) {

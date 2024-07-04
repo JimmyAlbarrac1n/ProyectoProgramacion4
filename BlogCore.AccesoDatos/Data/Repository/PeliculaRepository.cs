@@ -25,6 +25,7 @@ namespace BlogCore.AccesoDatos.Data.Repository
             objDesdeDb.UrlImagen = pelicula.UrlImagen;
             objDesdeDb.CarteleraId = pelicula.CarteleraId;
             objDesdeDb.Duracion = pelicula.Duracion;
+            objDesdeDb.Precio = pelicula.Precio;
 
 
             //_db.SaveChanges();

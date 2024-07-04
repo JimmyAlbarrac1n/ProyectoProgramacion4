@@ -30,5 +30,7 @@ namespace BlogCore.Models
         [Required(ErrorMessage = "La duración es obligatoria")]
         [Range(20,500)]
         public int Duracion { get; set; }
+        [Required(ErrorMessage = "El precio es obligatorio")]
+        public float Precio { get; set; }
     }
 }

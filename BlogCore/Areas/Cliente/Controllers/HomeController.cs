@@ -26,6 +26,13 @@ namespace BlogCore.Areas.Cliente.Controllers
             };
             return View(homeVM);
         }
+        [HttpGet]
+        public IActionResult Detalle(int id)
+        {
+            var articuloDesdeBd = _contenedorTrabajo.Pelicula.Get(id);
+            return View(articuloDesdeBd);
+
+        }
 
         public IActionResult Privacy()
         {
