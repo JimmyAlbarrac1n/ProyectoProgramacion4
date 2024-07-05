@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BlogCore.AccesoDatos.Migrations
 {
     /// <inheritdoc />
-    public partial class FinalBD : Migration
+    public partial class AgregarCamposNuevosIdentity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +30,11 @@ namespace BlogCore.AccesoDatos.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Pais = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -62,6 +67,21 @@ namespace BlogCore.AccesoDatos.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cartelera", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Slider",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Estado = table.Column<bool>(type: "bit", nullable: false),
+                    UrlImagen = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Slider", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -258,6 +278,9 @@ namespace BlogCore.AccesoDatos.Migrations
 
             migrationBuilder.DropTable(
                 name: "Pelicula");
+
+            migrationBuilder.DropTable(
+                name: "Slider");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

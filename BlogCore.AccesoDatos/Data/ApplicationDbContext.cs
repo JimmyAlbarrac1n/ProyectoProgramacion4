@@ -15,8 +15,8 @@ namespace BlogCore.Data
 
         public DbSet<Carteleras> Cartelera { get; set; }
         public DbSet<Pelicula> Pelicula { get; set; }
-
         public DbSet<Slider> Slider { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
     }
 }
