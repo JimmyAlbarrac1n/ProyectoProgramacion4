@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogCore.Utilidades", "Blog
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_ProyectoFinal", "API_ProyectoFinal\API_ProyectoFinal.csproj", "{3C5D2472-C5CC-46E2-8EFD-AAC9353E1AD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiAppProyectoFinal", "MauiAppProyectoFinal\MauiAppProyectoFinal.csproj", "{36EE0C79-40CD-4D0B-9B4F-AE3792D74E88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,12 @@ Global
 		{3C5D2472-C5CC-46E2-8EFD-AAC9353E1AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C5D2472-C5CC-46E2-8EFD-AAC9353E1AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C5D2472-C5CC-46E2-8EFD-AAC9353E1AD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36EE0C79-40CD-4D0B-9B4F-AE3792D74E88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36EE0C79-40CD-4D0B-9B4F-AE3792D74E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36EE0C79-40CD-4D0B-9B4F-AE3792D74E88}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{36EE0C79-40CD-4D0B-9B4F-AE3792D74E88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36EE0C79-40CD-4D0B-9B4F-AE3792D74E88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36EE0C79-40CD-4D0B-9B4F-AE3792D74E88}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
