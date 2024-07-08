@@ -1,9 +1,7 @@
 ﻿using MauiAppProyectoFinal.Models;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace MauiAppProyectoFinal.Services
@@ -40,4 +38,3 @@ namespace MauiAppProyectoFinal.Services
         }
     }
 }
-

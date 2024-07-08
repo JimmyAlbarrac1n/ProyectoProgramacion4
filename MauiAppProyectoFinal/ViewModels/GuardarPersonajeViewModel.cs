@@ -1,11 +1,8 @@
 ﻿using MauiAppProyectoFinal.Models;
 using MauiAppProyectoFinal.Services;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MauiAppProyectoFinal.ViewModels
@@ -96,7 +93,7 @@ namespace MauiAppProyectoFinal.ViewModels
                     Name = Name,
                     Status = Status,
                     Species = "Unknown", // Update with the actual species if available
-                    ImageUrl = ImageUri.ToString()
+                    ImageUrl = ImageUri?.ToString() // Ensure ImageUri is not null
                 };
 
                 await App.Database.SaveCharacterAsync(character);
@@ -109,9 +106,16 @@ namespace MauiAppProyectoFinal.ViewModels
             var character = await service.GetImage(Id);
             if (character != null)
             {
-                Name = character.name;
-                Status = character.status;
-                ImageUri = new Uri(character.imageUri);
+                Name = character.Name;
+                Status = character.Status;
+                if (!string.IsNullOrEmpty(character.ImageUrl))
+                {
+                    ImageUri = new Uri(character.ImageUrl);
+                }
+                else
+                {
+                    ImageUri = null;
+                }
             }
             else
             {

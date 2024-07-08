@@ -15,11 +15,11 @@
          Icon="{OnPlatform 'historialdetransacciones.png'}" 
          />
         <ShellContent
-        Title="Historial"
+        Title="Votar Personaje"
         ContentTemplate="{DataTemplate views:GuardarView}"
         Icon="{OnPlatform 'historialdetransacciones.png'}" />
         <ShellContent
-        Title="Historial"
+        Title="Personajes Votados"
         ContentTemplate="{DataTemplate views:VerGuardadosView}"
         Icon="{OnPlatform 'historialdetransacciones.png'}" />
     </TabBar>
